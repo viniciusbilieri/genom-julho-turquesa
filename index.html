@@ -22,22 +22,6 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- SVG clipPath para a gota — invisível, só define o shape -->
-  <svg width="0" height="0" style="position:absolute;overflow:hidden">
-    <defs>
-      <clipPath id="drop-clip" clipPathUnits="objectBoundingBox">
-        <!-- Gota: ponta no topo, círculo na base — fiel ao KV do conceito -->
-        <path d="
-          M 0.50 0.00
-          C 0.50 0.00, 0.92 0.28, 0.92 0.60
-          C 0.92 0.84, 0.73 1.00, 0.50 1.00
-          C 0.27 1.00, 0.08 0.84, 0.08 0.60
-          C 0.08 0.28, 0.50 0.00, 0.50 0.00
-          Z
-        "/>
-      </clipPath>
-    </defs>
-  </svg>
 </head>
 <body>
 
@@ -65,14 +49,6 @@
                class="hero__logo">
           <div class="hero__cta-group">
             <a href="#quiz" class="btn btn--primary btn--lg">Confira Agora!</a>
-          </div>
-        </div>
-
-        <!-- Foto na gota -->
-        <div class="hero__image fade-in fade-right">
-          <div class="hero__drop">
-            <img src="assets/img/conceito-mulher.jpg"
-                 alt="Pessoa com síndrome do olho seco usando computador">
           </div>
         </div>
 
@@ -471,37 +447,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <!-- Quiz JS (preservado integralmente) -->
   <script src="js/quiz.js"></script>
-  <!-- Animações + Contador -->
-  <script>
-    // IntersectionObserver — fade-in
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-in, .fade-left, .fade-right, .fade-up, .fade-down')
-      .forEach(el => observer.observe(el));
-
-    // Contador animado
-    const counterEl = document.querySelector('.counter[data-target]');
-    if (counterEl) {
-      const counterObs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          const target = +counterEl.dataset.target;
-          let current = 0;
-          const step = target / 60;
-          const timer = setInterval(() => {
-            current += step;
-            if (current >= target) { current = target; clearInterval(timer); }
-            counterEl.textContent = Math.floor(current);
-          }, 30);
-          counterObs.disconnect();
-        }
-      }, { threshold: 0.5 });
-      counterObs.observe(counterEl);
-    }
-  </script>
 
 </body>
 </html>

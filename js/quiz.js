@@ -138,16 +138,24 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(el);
   });
 
-  // Contador animado
+  // Contador animado — dispara apenas quando entra na viewport
   const counter = document.querySelector('.counter');
   if (counter) {
     const target = parseInt(counter.getAttribute('data-target'));
-    let current = 0;
-    const step = target / 60;
-    const timer = setInterval(function () {
-      current += step;
-      if (current >= target) { current = target; clearInterval(timer); }
-      counter.textContent = Math.floor(current);
-    }, 30);
+    let started = false;
+    const counterObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(function () {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          counter.textContent = Math.floor(current);
+        }, 30);
+        counterObs.unobserve(counter);
+      }
+    }, { threshold: 0.5 });
+    counterObs.observe(counter);
   }
 });
