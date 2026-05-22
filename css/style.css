@@ -660,6 +660,29 @@ p:last-child { margin-bottom: 0; }
   text-transform: uppercase;
 }
 
+/* ─── Alerta ─── */
+.quiz__alerta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.30);
+  border-radius: 50px;
+  padding: 8px 24px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.90);
+  margin-bottom: 20px;
+}
+
+.quiz__alerta i {
+  font-size: 16px;
+  color: #FFD84D;
+}
+
 /* ─── Pergunta card ─── */
 .row > div[id^="p"] {
   background: rgba(255,255,255,0.07) !important;
@@ -835,7 +858,7 @@ p:last-child { margin-bottom: 0; }
 
 .produtos-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
   margin-bottom: 48px;
 }
@@ -1039,7 +1062,7 @@ p:last-child { margin-bottom: 0; }
 
   .info-grid .info-col:first-child { grid-column: span 2; }
 
-  .produtos-grid { grid-template-columns: repeat(2, 1fr); }
+  .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
   .sintomas__grid { gap: 16px; }
   .sintoma-badge img { width: 110px; }
