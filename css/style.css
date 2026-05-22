@@ -228,6 +228,7 @@ p:last-child { margin-bottom: 0; }
   background-color: var(--primary);
   color: var(--base);
   border-color: var(--primary);
+  text-transform: none;
 }
 .btn--primary:hover {
   background-color: var(--primary-dark);
@@ -270,8 +271,8 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--font-heading);
   font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   padding: 0.8em 2.4em;
   border-radius: 50px;
   background-color: var(--primary);
@@ -510,7 +511,6 @@ p:last-child { margin-bottom: 0; }
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 700;
   color: var(--text-dark);
-  text-transform: uppercase;
 }
 
 .info-grid {
@@ -523,76 +523,83 @@ p:last-child { margin-bottom: 0; }
 /* ─── Contador ─── */
 .counter-block {
   text-align: center;
-  background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-500) 100%);
-  border-radius: var(--radius-xl);
-  padding: 48px 32px;
-  color: var(--base);
-  box-shadow: var(--shadow-lg);
+  padding: 20px 0;
 }
 
 .counter {
   font-family: var(--font-heading);
-  font-size: clamp(72px, 10vw, 110px);
+  font-size: clamp(80px, 11vw, 130px);
   font-weight: 800;
   line-height: 0.9;
-  color: var(--base);
-  letter-spacing: -2px;
+  color: var(--teal-600);
+  letter-spacing: -3px;
+  display: block;
 }
 
 .counter-label {
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 700;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.80);
+  color: var(--teal-600);
   letter-spacing: 0.05em;
   display: block;
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 16px;
 }
 
 .counter-block p {
   font-size: 14px;
-  color: rgba(255,255,255,0.70);
-  margin-top: 16px;
-  line-height: 1.6;
+  color: var(--text-body);
+  line-height: 1.7;
 }
 
-/* ─── Vídeo link ─── */
-.video-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: var(--bg-light);
-  border: 2px solid var(--teal-100);
+/* ─── Vídeo thumbnail ─── */
+.video-thumb {
+  position: relative;
+  display: block;
   border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--teal-600);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  transition: var(--transition);
-  aspect-ratio: 16/9;
+  overflow: hidden;
+  aspect-ratio: 4/3;
   text-decoration: none;
-}
-
-.video-link:hover {
-  background: var(--teal-600);
-  color: var(--base);
-  border-color: var(--teal-600);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.video-link .fab {
-  font-size: 40px;
-  color: #FF0000;
   transition: var(--transition);
 }
 
-.video-link:hover .fab { color: var(--base); }
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.video-thumb:hover img { transform: scale(1.04); }
+
+.video-thumb__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.video-thumb__overlay i {
+  font-size: 32px;
+  color: #FF0000;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.video-thumb__overlay span {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  line-height: 1.2;
+}
 
 /* ─── Coluna texto ─── */
 .info-col p {
@@ -607,8 +614,7 @@ p:last-child { margin-bottom: 0; }
   font-size: 22px;
   font-weight: 700;
   color: var(--teal-700);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
   margin-bottom: 20px;
 }
 
@@ -683,81 +689,92 @@ p:last-child { margin-bottom: 0; }
   color: #FFD84D;
 }
 
-/* ─── Pergunta card ─── */
+/* ─── Pergunta card — card branco como original ─── */
 .row > div[id^="p"] {
-  background: rgba(255,255,255,0.07) !important;
-  border: 1px solid rgba(255,255,255,0.15) !important;
-  border-radius: var(--radius-lg) !important;
-  box-shadow: none !important;
-  padding: 32px !important;
-  color: var(--base);
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+  padding: 28px 28px 24px !important;
+  color: var(--text-dark);
 }
 
 .row > div[id^="p"] span {
-  font-family: var(--font-heading);
-  font-size: clamp(18px, 2.2vw, 22px);
-  font-weight: 600;
-  color: var(--base);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-dark);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.row > div[id^="p"] span strong {
+  font-weight: 700;
+  color: var(--teal-700);
 }
 
 /* ─── Quiz options ─── */
 .quiz-options {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 6px;
+  margin-top: 16px;
 }
+
+/* Anula os <br><br> do HTML legado do quiz */
+.quiz-options br { display: none; }
 
 .quiz-options--two {
   flex-direction: row;
-  gap: 16px;
+  gap: 10px;
 }
 
-/* ─── st-btn — botões do quiz ─── */
+/* ─── st-btn — botões compactos como original ─── */
 .st-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   line-height: 1.2;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  border: 2px solid transparent;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1.5px solid var(--teal-400);
   transition: var(--transition);
   cursor: pointer;
   width: 100%;
-  text-align: left;
+  text-align: center;
+  background: #fff;
+  color: var(--teal-600);
 }
 
-.st-btn:hover { transform: translateX(6px); }
-
-.st-btn.st-style2.st-color1 {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.20);
-  color: rgba(255,255,255,0.85);
-}
-
+.st-btn:hover,
 .st-btn.st-style2.st-color1:hover,
 .st-btn.st-style2.st-color1.selected {
   background: var(--teal-400);
   border-color: var(--teal-400);
-  color: var(--base);
+  color: #fff;
   transform: none;
   box-shadow: var(--shadow-sm);
 }
 
+.st-btn.st-style2.st-color1 {
+  background: #fff;
+  border-color: var(--teal-400);
+  color: var(--teal-600);
+}
+
 .st-btn.st-style1.st-color1 {
   background: var(--primary);
-  color: var(--base);
+  color: #fff;
   border-color: var(--primary);
   width: auto;
   margin-top: 8px;
+  font-weight: 700;
 }
 
 .st-btn.st-style1.st-color1:hover {
