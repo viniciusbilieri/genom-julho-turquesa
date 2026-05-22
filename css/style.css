@@ -1,0 +1,1147 @@
+/* =============================================================================
+   GENOM — Síndrome do Olho Seco | Campanha Julho Turquesa
+   Landing Page — CSS Unificado
+   ============================================================================= */
+
+/* =============================================================================
+   1. @font-face — Barlow Condensed (campanha) + Open Sans (corpo)
+   ============================================================================= */
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../assets/fonts/BarlowCondensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../assets/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../assets/fonts/BarlowCondensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../assets/fonts/BarlowCondensed-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Open Sans — corpo de texto */
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../assets/fonts/opensans-memvyags126mizpba-uvwbx2vvnxbbobj2ovts-muw.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../assets/fonts/opensans-memvyags126mizpba-uvwbx2vvnxbbobj2ovtscmu1ab.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =============================================================================
+   2. CSS Variables — Paleta Julho Turquesa (extraída dos PSDs)
+   ============================================================================= */
+
+:root {
+  /* ─── Paleta Turquesa (cores reais dos PSDs) ─── */
+  --teal-900:   #1e5a64;   /* sombra profunda / texto sobre turquesa */
+  --teal-700:   #286e78;   /* ícone box — fill escuro */
+  --teal-600:   #28828c;   /* ícone box — fill principal */
+  --teal-500:   #3caabe;   /* médio */
+  --teal-400:   #46bed2;   /* Box Azul / CTAs / hero claro */
+  --teal-300:   #64b4be;   /* linha dos ícones stroke */
+  --teal-200:   #8ed8e4;   /* hover / destaques leves */
+  --teal-100:   #d0f0f4;   /* backgrounds claros */
+
+  /* ─── Semânticos ─── */
+  --primary:          var(--teal-400);   /* CTA principal */
+  --primary-dark:     var(--teal-600);   /* hover CTA */
+  --bg-hero:          var(--teal-500);   /* fundo hero */
+  --bg-quiz:          var(--teal-700);   /* fundo quiz */
+  --bg-light:         #f2fafb;           /* seções claras */
+  --base:             #ffffff;
+  --text-dark:        #0d2b30;           /* titulos dark */
+  --text-body:        #4a6a6e;           /* corpo de texto */
+  --text-muted:       #9ab8bc;
+  --text-on-dark:     rgba(255,255,255,0.90);
+  --text-on-dark-sub: rgba(255,255,255,0.70);
+
+  /* ─── Tipografia ─── */
+  --font-heading: 'Barlow Condensed', sans-serif;
+  --font-body:    'Open Sans', sans-serif;
+
+  /* ─── Layout ─── */
+  --section-py:     90px;
+  --section-py-md:  60px;
+  --section-py-sm:  40px;
+  --container:      1200px;
+  --container-pad:  24px;
+  --radius:         10px;
+  --radius-lg:      20px;
+  --radius-xl:      32px;
+
+  /* ─── Sombras ─── */
+  --shadow-sm:  0 2px 8px rgba(40,130,140,0.10);
+  --shadow-md:  0 6px 24px rgba(40,130,140,0.16);
+  --shadow-lg:  0 16px 48px rgba(40,130,140,0.22);
+
+  /* ─── Transição ─── */
+  --transition: all 0.3s ease;
+}
+
+/* =============================================================================
+   3. Reset
+   ============================================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-body);
+  background-color: var(--base);
+  overflow-x: hidden;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; transition: var(--transition); }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+
+/* =============================================================================
+   4. Tipografia
+   ============================================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-dark);
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(40px, 6vw, 68px); }
+h2 { font-size: clamp(28px, 4vw, 46px); }
+h3 { font-size: clamp(20px, 2.5vw, 28px); }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; }
+
+p { margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+/* =============================================================================
+   5. Layout
+   ============================================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* =============================================================================
+   6. Animações Fade-In (IntersectionObserver)
+   ============================================================================= */
+
+.fade-in, .fade-left, .fade-right, .fade-up, .fade-down {
+  opacity: 0;
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.fade-in    { transform: none; }
+.fade-left  { transform: translateX(-40px); }
+.fade-right { transform: translateX(40px); }
+.fade-up    { transform: translateY(40px); }
+.fade-down  { transform: translateY(-40px); }
+
+.fade-in.visible,  .fade-left.visible,
+.fade-right.visible, .fade-up.visible, .fade-down.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.fade-delay-1 { transition-delay: 0.1s; }
+.fade-delay-2 { transition-delay: 0.2s; }
+.fade-delay-3 { transition-delay: 0.3s; }
+.fade-delay-4 { transition-delay: 0.4s; }
+.fade-delay-5 { transition-delay: 0.5s; }
+
+/* =============================================================================
+   7. Botões
+   ============================================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 0.8em 2.4em;
+  border-radius: 50px;
+  border: 2.5px solid transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* Primário — turquesa sólido */
+.btn--primary {
+  background-color: var(--primary);
+  color: var(--base);
+  border-color: var(--primary);
+}
+.btn--primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: var(--base);
+}
+
+/* Outline branco (sobre fundo escuro) */
+.btn--outline-white {
+  background-color: transparent;
+  color: var(--base);
+  border-color: rgba(255,255,255,0.7);
+}
+.btn--outline-white:hover {
+  background-color: var(--base);
+  color: var(--teal-700);
+  border-color: var(--base);
+}
+
+/* Outline turquesa (sobre fundo claro) */
+.btn--outline-teal {
+  background-color: transparent;
+  color: var(--teal-600);
+  border-color: var(--teal-600);
+}
+.btn--outline-teal:hover {
+  background-color: var(--teal-600);
+  color: var(--base);
+}
+
+/* Tamanhos */
+.btn--lg  { font-size: 20px; padding: 0.9em 2.8em; }
+.btn--sm  { font-size: 14px; padding: 0.6em 1.6em; }
+
+/* Compatibilidade com classes legadas do quiz */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.8em 2.4em;
+  border-radius: 50px;
+  background-color: var(--primary);
+  color: var(--base);
+  border: 2.5px solid var(--primary);
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =============================================================================
+   8. Hero (#hero)
+   ============================================================================= */
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3a9ab4 0%, #5abcd0 55%, #46bed2 100%);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: 100px 160px;
+}
+
+/* Bokeh decorativo — círculos de luz translúcidos */
+#hero::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  top: -100px;
+  right: -80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30,90,100,0.25) 0%, transparent 70%);
+  bottom: 40px;
+  left: -60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* ─── Coluna esquerda: texto ─── */
+.hero__content { color: var(--base); }
+
+.hero__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.30);
+  border-radius: 50px;
+  padding: 5px 16px;
+  margin-bottom: 24px;
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 5.5vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--base);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero__divider {
+  width: 60px;
+  height: 3px;
+  background: rgba(255,255,255,0.5);
+  border: none;
+  margin-bottom: 20px;
+}
+
+.hero__subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--text-on-dark);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero__text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-on-dark-sub);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+
+.hero__logo {
+  margin-bottom: 36px;
+  filter: brightness(0) invert(1);
+  opacity: 0.90;
+  max-width: 260px;
+}
+
+.hero__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ─── Coluna direita: foto na gota ─── */
+.hero__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Sombra/glow atrás da gota */
+.hero__image::before {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  background: radial-gradient(ellipse, rgba(30,90,100,0.35) 0%, transparent 70%);
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Container da gota — clip SVG */
+.hero__drop {
+  position: relative;
+  z-index: 1;
+  width: min(420px, 90%);
+  aspect-ratio: 0.72;
+  animation: hero-float 5s ease-in-out infinite;
+  /* Clip path em forma de gota: ponta no topo, círculo na base */
+  clip-path: url(#drop-clip);
+  overflow: hidden;
+  filter: drop-shadow(0 24px 48px rgba(30,90,100,0.45));
+}
+
+.hero__drop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-18px); }
+}
+
+/* ─── Shape divider wave na base ─── */
+.hero__shape-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+}
+
+.hero__shape-divider svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.hero__shape-divider .shape-fill { fill: var(--base); }
+
+/* =============================================================================
+   9. Sintomas (#sintomas)
+   ============================================================================= */
+
+#sintomas {
+  padding-block: 64px;
+  background: var(--base);
+  border-bottom: 1px solid var(--teal-100);
+}
+
+.sintomas__intro {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sintomas__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal-400);
+  margin-bottom: 12px;
+}
+
+.sintomas__title {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.sintomas__grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Cada badge é a imagem do PSD — balão turquesa com ícone + label */
+.sintoma-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transition: var(--transition);
+  cursor: default;
+}
+
+.sintoma-badge:hover { transform: translateY(-6px); }
+
+.sintoma-badge img {
+  width: 130px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(40,130,140,0.25));
+  transition: var(--transition);
+}
+
+.sintoma-badge:hover img {
+  filter: drop-shadow(0 12px 24px rgba(40,130,140,0.40));
+}
+
+/* =============================================================================
+   10. Info (#info)
+   ============================================================================= */
+
+#info {
+  padding-block: var(--section-py);
+  background-color: var(--base);
+}
+
+.info-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.info-header i {
+  font-size: 28px;
+  color: var(--teal-400);
+  margin-bottom: 12px;
+  display: block;
+  animation: bounce-down 1.8s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+.info-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ─── Contador ─── */
+.counter-block {
+  text-align: center;
+  background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-500) 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px 32px;
+  color: var(--base);
+  box-shadow: var(--shadow-lg);
+}
+
+.counter {
+  font-family: var(--font-heading);
+  font-size: clamp(72px, 10vw, 110px);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--base);
+  letter-spacing: -2px;
+}
+
+.counter-label {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.80);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-top: 8px;
+}
+
+.counter-block p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.70);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* ─── Vídeo link ─── */
+.video-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-light);
+  border: 2px solid var(--teal-100);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--teal-600);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: var(--transition);
+  aspect-ratio: 16/9;
+  text-decoration: none;
+}
+
+.video-link:hover {
+  background: var(--teal-600);
+  color: var(--base);
+  border-color: var(--teal-600);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.video-link .fab {
+  font-size: 40px;
+  color: #FF0000;
+  transition: var(--transition);
+}
+
+.video-link:hover .fab { color: var(--base); }
+
+/* ─── Coluna texto ─── */
+.info-col p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-bottom: 14px;
+}
+
+.info-col h4 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal-700);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+
+/* =============================================================================
+   11. Quiz (#quiz)
+   ============================================================================= */
+
+#quiz {
+  position: relative;
+  padding-block: var(--section-py);
+  background: linear-gradient(160deg, var(--teal-700) 0%, var(--teal-900) 100%);
+  overflow: hidden;
+}
+
+#quiz::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/img/Gotas BG.jpg');
+  background-size: cover;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.quiz-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+#quiz h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#quiz h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 800;
+  color: var(--base);
+  text-align: center;
+  margin-bottom: 48px;
+  text-transform: uppercase;
+}
+
+/* ─── Pergunta card ─── */
+.row > div[id^="p"] {
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: none !important;
+  padding: 32px !important;
+  color: var(--base);
+}
+
+.row > div[id^="p"] span {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 600;
+  color: var(--base);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Quiz options ─── */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.quiz-options--two {
+  flex-direction: row;
+  gap: 16px;
+}
+
+/* ─── st-btn — botões do quiz ─── */
+.st-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.st-btn:hover { transform: translateX(6px); }
+
+.st-btn.st-style2.st-color1 {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.20);
+  color: rgba(255,255,255,0.85);
+}
+
+.st-btn.st-style2.st-color1:hover,
+.st-btn.st-style2.st-color1.selected {
+  background: var(--teal-400);
+  border-color: var(--teal-400);
+  color: var(--base);
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.st-btn.st-style1.st-color1 {
+  background: var(--primary);
+  color: var(--base);
+  border-color: var(--primary);
+  width: auto;
+  margin-top: 8px;
+}
+
+.st-btn.st-style1.st-color1:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ─── Formulário de lead ─── */
+.st-appointment-form h2 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--base);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.st-form-field.st-style1 input,
+.st-form-field.st-style1 select,
+.st-form-field.st-style1 textarea {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: var(--radius);
+  color: var(--base);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+  margin-bottom: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.st-form-field.st-style1 input::placeholder { color: rgba(255,255,255,0.35); }
+
+.st-form-field.st-style1 input:focus,
+.st-form-field.st-style1 select:focus {
+  outline: none;
+  border-color: var(--teal-400);
+  background: rgba(70,190,210,0.08);
+}
+
+.col-lg-6 { width: 50%; display: inline-block; vertical-align: top; padding: 0 6px; box-sizing: border-box; }
+.col-lg-12 { width: 100%; padding: 0 6px; box-sizing: border-box; }
+
+/* Termo + Checkbox */
+.col-lg-12 > p {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  padding: 12px !important;
+  height: 130px;
+}
+
+.col-lg-12 input[type="checkbox"] {
+  accent-color: var(--teal-400);
+  margin-right: 8px;
+}
+
+.col-lg-12 label, .col-lg-12 > div:last-child {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+
+.col-lg-12 a { color: var(--teal-300); text-decoration: underline; }
+
+#res_ok h3 { color: var(--base) !important; }
+#res_ok p  { color: rgba(255,255,255,0.75); }
+
+/* =============================================================================
+   12. Produtos (#produtos)
+   ============================================================================= */
+
+#produtos {
+  padding-block: var(--section-py);
+  background-color: var(--bg-light);
+}
+
+#produtos h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 56px;
+  max-width: 700px;
+  margin-inline: auto;
+  margin-bottom: 56px;
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+.produto-card {
+  background: var(--base);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.produto-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.produto-card > a:first-child {
+  display: block;
+  background: #f8fbfc;
+  padding: 32px 20px;
+}
+
+.produto-card > a:first-child img {
+  max-height: 160px;
+  width: auto;
+  margin-inline: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 8px 20px rgba(40,130,140,0.15));
+}
+
+.produto-card:hover > a:first-child img { transform: scale(1.06); }
+
+.produto-card h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  padding: 16px 16px 4px;
+}
+
+.produto-card h6 {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 16px 16px;
+}
+
+.btn-saiba-mais {
+  display: block;
+  margin: 0 16px 20px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid var(--teal-400);
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--teal-600);
+  transition: var(--transition);
+}
+
+.btn-saiba-mais:hover {
+  background: var(--teal-400);
+  color: var(--base);
+  transform: none;
+}
+
+.produtos-cta { text-align: center; }
+
+/* =============================================================================
+   13. Aviso Legal (#aviso-legal)
+   ============================================================================= */
+
+#aviso-legal {
+  padding-block: 40px;
+  background: var(--teal-100);
+  text-align: center;
+  border-top: 1px solid rgba(70,190,210,0.2);
+  border-bottom: 1px solid rgba(70,190,210,0.2);
+}
+
+#aviso-legal h3 {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal-700);
+  line-height: 1.7;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* =============================================================================
+   14. Apoio (#apoio)
+   ============================================================================= */
+
+#apoio {
+  padding-block: 60px;
+  background: var(--base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#apoio img {
+  max-width: 340px;
+  margin-inline: auto;
+  opacity: 0.85;
+  transition: var(--transition);
+}
+
+#apoio img:hover { opacity: 1; }
+
+/* =============================================================================
+   15. Footer
+   ============================================================================= */
+
+#footer {
+  background: var(--teal-900);
+  padding-block: 36px;
+}
+
+.footer-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  height: 36px;
+  width: auto;
+  margin-inline: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  transition: var(--transition);
+}
+
+.footer-links a:hover { color: var(--teal-300); }
+
+/* =============================================================================
+   16. Contador animado (JS)
+   ============================================================================= */
+
+.counter { transition: color 0.3s ease; }
+
+/* =============================================================================
+   17. Responsive — Tablet (max 1024px)
+   ============================================================================= */
+
+@media (max-width: 1024px) {
+  :root { --section-py: var(--section-py-md); }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .hero__text { max-width: 100%; margin-inline: auto; }
+  .hero__logo { margin-inline: auto; }
+  .hero__cta-group { justify-content: center; }
+  .hero__image { order: -1; }
+  .hero__drop { width: min(320px, 80%); }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .info-grid .info-col:first-child { grid-column: span 2; }
+
+  .produtos-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .sintomas__grid { gap: 16px; }
+  .sintoma-badge img { width: 110px; }
+}
+
+/* =============================================================================
+   18. Responsive — Mobile (max 768px)
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: var(--section-py-sm);
+    --container-pad: 16px;
+  }
+
+  #hero { padding-block: 80px 120px; }
+
+  .hero__shape-divider svg { height: 50px; }
+  .hero__drop { width: min(260px, 75%); }
+
+  .info-grid { grid-template-columns: 1fr; }
+  .info-grid .info-col:first-child { grid-column: span 1; }
+
+  .sintamas__grid { gap: 12px; }
+  .sintoma-badge img { width: 90px; }
+
+  .produtos-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .col-lg-6 { width: 100%; display: block; }
+
+  #footer .footer-links { flex-direction: column; gap: 14px; }
+}
+
+/* =============================================================================
+   19. Responsive — Mobile pequeno (max 480px)
+   ============================================================================= */
+
+@media (max-width: 480px) {
+  .hero__cta-group { flex-direction: column; align-items: stretch; }
+  .hero__cta-group .btn, .hero__cta-group .btn-primary { text-align: center; }
+
+  .sintomas__grid { gap: 10px; }
+  .sintoma-badge img { width: 76px; }
+
+  .produtos-grid { grid-template-columns: 1fr; }
+
+  #aviso-legal h3 { font-size: 10px; }
+}
