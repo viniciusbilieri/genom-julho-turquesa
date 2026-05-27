@@ -34,25 +34,56 @@
        HERO
   ================================================================= -->
   <section id="hero">
-    <div class="container">
-      <div class="hero__inner">
 
-        <!-- Texto -->
-        <div class="hero__content fade-in fade-left">
-          <span class="hero__eyebrow">Julho Turquesa</span>
-          <h1 class="hero__title">Seus olhos também têm sede de saúde.</h1>
-          <hr class="hero__divider">
-          <p class="hero__subtitle">Hidrate-os diariamente!</p>
-          <p class="hero__text"><strong>Confira o questionário sobre sintomas do olho seco e saiba mais sobre o tema.</strong></p>
-          <img src="assets/img/logo-genom-mais-grupo-uniao-quimica.png"
-               alt="Logo Genom + Grupo União Química"
-               class="hero__logo">
-          <div class="hero__cta-group">
-            <a href="#quiz" class="btn btn--primary btn--lg">Saiba se você tem olho seco</a>
-          </div>
+    <!-- Layer 1 (z-index:1): gota full-bleed + badges flutuantes -->
+    <div class="hero__visual">
+      <div class="hero__drop-wrap">
+        <img src="assets/img/hero-gota.png" class="hero__drop" alt="Síndrome do Olho Seco">
+        <div class="hero__badge hero__badge--ardor">
+          <img src="assets/img/badge-ardor.png" alt="Ardor">
         </div>
-
+        <div class="hero__badge hero__badge--secura">
+          <img src="assets/img/badge-secura.png" alt="Secura">
+        </div>
+        <div class="hero__badge hero__badge--vermelhidao">
+          <img src="assets/img/badge-vermelhidao.png" alt="Vermelhidão">
+        </div>
+        <div class="hero__badge hero__badge--coceira">
+          <img src="assets/img/badge-coceira.png" alt="Coceira">
+        </div>
+        <div class="hero__badge hero__badge--areia">
+          <img src="assets/img/badge-areia.png" alt='Sensação de "areia"'>
+        </div>
       </div>
+    </div>
+
+    <!-- Layer 2 (z-index:2): texto + Julho Turquesa + logos -->
+    <div class="hero__layout container">
+
+      <!-- Topo-esquerda: headline + subtítulo + CTA -->
+      <div class="hero__content hero--anim-left">
+        <h1 class="hero__title">Alerta de<br>Hidratação</h1>
+        <p class="hero__subtitle">Seus olhos também têm sede.<br>Fique atento aos sinais!</p>
+        <div class="hero__cta-group">
+          <a href="#quiz" class="btn btn--primary btn--lg">Saiba se você tem olho seco</a>
+        </div>
+      </div>
+
+      <!-- Canto inferior-esquerdo: Julho Turquesa -->
+      <div class="hero__julho">
+        <i class="fas fa-ribbon hero__julho-icon"></i>
+        <div class="hero__julho-text">
+          <span class="hero__julho-title">Julho Turquesa</span>
+          <span class="hero__julho-sub">Mês de conscientização do olho seco</span>
+        </div>
+      </div>
+
+      <!-- Canto inferior-direito: logos Genom + Grupo União Química -->
+      <div class="hero__brand">
+        <img src="assets/img/logo-genom-mais-grupo-uniao-quimica.png"
+             alt="Logo Genom + Grupo União Química">
+      </div>
+
     </div>
 
     <!-- Wave divider -->

@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(el);
   });
 
-  // Contador animado — dispara apenas quando entra na viewport
+  // Contador animado — easing quadrático, dispara na viewport
   const counter = document.querySelector('.counter');
   if (counter) {
     const target = parseInt(counter.getAttribute('data-target'));
@@ -146,16 +146,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const counterObs = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting && !started) {
         started = true;
-        let current = 0;
-        const step = target / 60;
-        const timer = setInterval(function () {
-          current += step;
-          if (current >= target) { current = target; clearInterval(timer); }
-          counter.textContent = Math.floor(current);
-        }, 30);
+        const duration = 2000; // ms
+        const startTime = performance.now();
+        function tick(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // easeOutQuart: starts fast, decelerates near end
+          const eased = 1 - Math.pow(1 - progress, 4);
+          counter.textContent = Math.floor(eased * target);
+          if (progress < 1) requestAnimationFrame(tick);
+          else counter.textContent = target;
+        }
+        requestAnimationFrame(tick);
         counterObs.unobserve(counter);
       }
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
     counterObs.observe(counter);
   }
 });
