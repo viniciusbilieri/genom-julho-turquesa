@@ -311,6 +311,7 @@ p:last-child { margin-bottom: 0; }
   top: 0;
   z-index: 0;
   min-height: 100vh;
+  min-height: 100svh; /* iOS Safari: exclui a barra do browser */
   background: url('../assets/img/hero-bg.png') center / cover no-repeat;
   overflow: hidden;
 }
@@ -430,6 +431,7 @@ p:last-child { margin-bottom: 0; }
   align-items: flex-start;
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
   padding-block: 80px 140px;
 }
 
@@ -464,6 +466,16 @@ p:last-child { margin-bottom: 0; }
   flex-wrap: wrap;
   gap: 14px;
   align-items: center;
+}
+
+/* CTA mobile: oculto por defeito, aparece apenas em portrait ≤1024px */
+.hero__cta--mobile {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  white-space: nowrap;
 }
 
 /* Julho Turquesa: canto inferior-esquerdo do layout */
@@ -1373,38 +1385,111 @@ p:last-child { margin-bottom: 0; }
 .counter { transition: color 0.3s ease; }
 
 /* =============================================================================
-   17. Responsive — Tablet (max 1024px)
+   17. Responsive — Desktop médio (max 1280px)
+   ============================================================================= */
+
+@media (max-width: 1280px) {
+  .hero__badge--vermelhidao { width: 210px; }
+  .hero__badge--ardor       { width: 165px; }
+  .hero__badge--coceira     { width: 140px; }
+  .hero__badge--areia       { width: 140px; }
+  .hero__badge--secura      { width: 140px; }
+}
+
+/* =============================================================================
+   18. Responsive — Tablet landscape (max 1024px, orientation landscape)
+   ============================================================================= */
+
+/*
+  Em landscape a gota 16:9 é limitada pela altura → pillar-boxing lateral.
+  As posições % de top/bottom continuam corretas; só reduzimos os tamanhos.
+*/
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero__badge--vermelhidao { width: 130px; }
+  .hero__badge--ardor       { width: 105px; }
+  .hero__badge--coceira     { width: 90px;  }
+  .hero__badge--areia       { width: 90px;  }
+  .hero__badge--secura      { width: 90px;  }
+}
+
+/* =============================================================================
+   18b. Responsive — iPad portrait (min 769px, max 1024px, portrait)
+   ============================================================================= */
+
+/*
+  hero-gota-mobile.png (700×1080) em iPad Pro portrait (1024×1366):
+  → limitante: altura → escala 1.265
+  → gota renderiza 885×1366px, pillar-box 69.5px cada lado
+  → gota shape: x 10.5%–89.5%  /  y 10.4%–90.1%
+*/
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  :root { --section-py: var(--section-py-md); }
+
+  .hero__layout {
+    align-items: flex-start;
+    padding-block: 50px 200px;
+  }
+  .hero__content { width: 60%; max-width: 520px; }
+
+  /* CTA desktop: oculto no iPad portrait */
+  .hero__cta--desktop { display: none; }
+
+  /* CTA mobile: visível, centralizado abaixo da gota */
+  .hero__cta--mobile {
+    display: flex;
+    top: 89%;
+    width: auto;
+  }
+  .hero__cta--mobile .btn { width: auto; }
+
+  /* Logos */
+  .hero__julho     { bottom: 50px; }
+  .hero__julho img { width: 230px; }
+  .hero__brand     { display: block; bottom: 90px; right: var(--container-pad); }
+  .hero__brand img { width: 230px; }
+
+  /* Badge sizes do ajuste manual do usuário */
+  .hero__badge--vermelhidao { width: 280px; }
+  .hero__badge--ardor       { width: 250px; }
+  .hero__badge--coceira     { width: 250px; }
+  .hero__badge--areia       { width: 250px; }
+  .hero__badge--secura      { width: 250px; }
+
+  /* Posições convertidas de px → % (1024×1366) */
+  .hero__badge--ardor       { top: 22%;  left: 9%;   bottom: auto; }
+  .hero__badge--coceira     { top: 11%;  left: 54%;  bottom: auto; }
+  .hero__badge--vermelhidao { top: 32%;  left: 72%;  bottom: auto; }
+  .hero__badge--secura      { top: 59%;  left: 4%;   bottom: auto; }
+  .hero__badge--areia       { top: 68%;  left: 62%;  bottom: auto; }
+}
+
+/* =============================================================================
+   18c. Responsive — Tablet (regras gerais, sem orientation)
    ============================================================================= */
 
 @media (max-width: 1024px) {
   :root { --section-py: var(--section-py-md); }
 
-  /* Tablet: texto ocupa mais largura, badges reduzidos */
-  .hero__content { width: 55%; }
-
-  .hero__badge--vermelhidao { width: 120px; }
-  .hero__badge--ardor       { width: 96px;  }
-  .hero__badge--coceira     { width: 84px;  }
-  .hero__badge--areia       { width: 84px;  }
-  .hero__badge--secura      { width: 76px;  }
-
-  .hero__brand img { max-width: 160px; }
-
-  .info-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-
+  /* ─── Info ─── */
+  #info { padding-block: 80px; }
+  .info-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .info-grid .info-col:first-child { grid-column: span 2; }
+  .info-col:last-child { display: flex; flex-direction: column; }
 
+  /* ─── Quiz ─── */
+  .quiz__stage  { padding: 48px 44px; }
+  .quiz-wrapper { max-width: 860px; }
+
+  /* ─── Produtos ─── */
   .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
+  /* ─── Misc ─── */
   .sintomas__grid { gap: 16px; }
   .sintoma-badge img { width: 110px; }
 }
 
 /* =============================================================================
-   18. Responsive — Mobile (max 768px)
+   19. Responsive — Mobile (max 768px)
    ============================================================================= */
 
 @media (max-width: 768px) {
@@ -1413,56 +1498,149 @@ p:last-child { margin-bottom: 0; }
     --container-pad: 16px;
   }
 
-  /* Mobile: texto ocupa largura total, brand oculto */
-  .hero__layout { padding-block: 60px 120px; }
-  .hero__content { width: 100%; max-width: 100%; }
-  .hero__subtitle { max-width: 100%; }
-  .hero__brand { display: none; }
-
-  /* Julho Turquesa: sobe um pouco */
-  .hero__julho { bottom: 80px; }
-
-  /* Badges menores */
-  .hero__badge--vermelhidao { width: 90px; }
-  .hero__badge--ardor       { width: 72px; }
-  .hero__badge--coceira     { width: 63px; }
-  .hero__badge--areia       { width: 63px; }
-  .hero__badge--secura      { width: 57px; }
-
+  /* ─── Hero ─── */
+  /*
+    Flex-column: content no topo, CTA empurrado para baixo com margin-top:auto.
+    Padding bottom garante espaço para CTA + logos.
+  */
+  .hero__layout {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: 40px 200px;
+  }
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    max-width: 100%;
+    flex: 1;
+  }
+  .hero__subtitle { max-width: 100%; font-size: 16px; }
   .hero__shape-divider svg { height: 50px; }
 
-  .info-grid { grid-template-columns: 1fr; }
-  .info-grid .info-col:first-child { grid-column: span 1; }
+  /* CTA desktop: oculto no iPhone */
+  .hero__cta--desktop { display: none; }
 
+  /* CTA mobile: visível, abaixo da gota (letterbox top ~14%, gota até ~78%) */
+  .hero__cta--mobile {
+    display: flex;
+    top: 80%;
+    width: 80%;
+  }
+  .hero__cta--mobile .btn { width: 100%; text-align: center; }
+
+  /* Logos */
+  .hero__julho         { bottom: 40px; }
+  .hero__julho img     { width: 160px; }
+  .hero__brand         { display: block; bottom: 62px; right: var(--container-pad); }
+  .hero__brand img     { width: 160px; }
+
+  /* Badges — posições baseadas no ajuste manual do usuário (430x932) */
+  .hero__badge--vermelhidao { width: 150px; }
+  .hero__badge--ardor       { width: 140px; }
+  .hero__badge--coceira     { width: 140px; }
+  .hero__badge--areia       { width: 150px; }
+  .hero__badge--secura      { width: 140px; }
+
+  /* left: "unchanged" mantém o valor do CSS base; bottom: auto limpa bottom herdado */
+  .hero__badge--ardor       { top: 25%;  left: 4%;    bottom: auto; }
+  .hero__badge--coceira     { top: 17%;  left: 46%;   bottom: auto; }
+  .hero__badge--vermelhidao { top: 29%;  left: 64%;   bottom: auto; }
+  .hero__badge--secura      { top: 58%;  left: 1%;    bottom: auto; }
+  .hero__badge--areia       { top: 56%;  left: 65%;   bottom: auto; }
+
+  /* ─── Info ─── */
+  #info           { padding-block: 60px; }
+  .info-grid      { grid-template-columns: 1fr; gap: 32px; }
+  .info-grid .info-col:first-child { grid-column: span 1; }
+  .info-col       { min-width: 0; width: 100%; } /* impede overflow no grid */
+  .info-col:last-child { display: block; }
+  .info-col .btn-primary { display: block; text-align: center; }
+  .counter-block  { width: 100%; }
+  .counter-block p { max-width: 100%; }
+
+  /* Vídeo: largura e altura controladas pela coluna */
+  .video-thumb    { width: 100%; height: auto !important; aspect-ratio: 16/9; }
+
+  /* ─── Quiz ─── */
+  #quiz           { padding-block: 60px 80px; }
+  #quiz h2        { font-size: clamp(26px, 7vw, 40px); margin-bottom: 32px; }
+  .quiz-wrapper   { max-width: 100%; }
+  .quiz__stage    { padding: 32px 28px; min-height: unset; border-radius: 20px; }
+
+  /* Form 2→1 coluna dentro do stage */
+  .quiz__stage .col-lg-6 {
+    width: 100% !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+  .quiz__stage #appointment-form-2 > .row { flex-direction: column; }
+
+  /* Buttons do quiz menores */
+  .st-btn { font-size: 16px; padding: 15px 20px; }
+
+  /* ─── Produtos ─── */
+  #produtos h2  { font-size: clamp(20px, 5vw, 30px); margin-bottom: 32px; }
+  .produtos-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .produto-card  { min-width: 0; }
+  .produto-card h3 { font-size: 20px; }
+
+  /* ─── Misc ─── */
   .sintomas__grid { gap: 12px; }
   .sintoma-badge img { width: 90px; }
 
-  .produtos-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  /* col-lg global (fora do stage, e.g. outros forms) */
+  .col-lg-6 { width: 100% !important; display: block !important; }
 
-  .col-lg-6 { width: 100%; display: block; }
-
+  /* ─── Footer ─── */
   #footer .footer-links { flex-direction: column; gap: 14px; }
 }
 
 /* =============================================================================
-   19. Responsive — Mobile pequeno (max 480px)
+   20. Responsive — Mobile pequeno (max 480px)
    ============================================================================= */
 
 @media (max-width: 480px) {
-  /* Badges ainda menores */
-  .hero__badge--vermelhidao { width: 72px; }
-  .hero__badge--ardor       { width: 58px; }
-  .hero__badge--coceira     { width: 50px; }
-  .hero__badge--areia       { width: 50px; }
-  .hero__badge--secura      { width: 45px; }
+  /* ─── Hero ─── */
+  .hero__layout   { padding-block: 48px 140px; }
+  .hero__content  { width: 95%; }
+  .hero__title    { font-size: clamp(36px, 10vw, 52px); }
+  .hero__subtitle { font-size: 15px; }
+  .hero__julho    { bottom: 60px; }
+  .hero__julho img { width: 110px; }
 
-  .hero__cta-group { flex-direction: column; align-items: stretch; }
-  .hero__cta-group .btn, .hero__cta-group .btn-primary { text-align: center; }
+  .hero__cta--mobile { width: 88%; }
+  .hero__cta--mobile .btn { text-align: center; }
 
+  /* ─── Info ─── */
+  .counter        { font-size: clamp(64px, 18vw, 100px); }
+  .counter-label  { font-size: 22px; }
+
+  /* ─── Quiz ─── */
+  .quiz__stage    { padding: 24px 18px; border-radius: 16px; }
+  #quiz h2        { font-size: clamp(24px, 8vw, 36px); }
+  #quiz h3        { font-size: 13px; }
+  .st-btn         { font-size: 15px; padding: 13px 16px; border-radius: 8px; }
+
+  /* ─── Produtos ─── */
+  .produtos-grid  { grid-template-columns: 1fr; }
+  .produto-card h3 { font-size: 18px; }
+
+  /* ─── Aviso Legal ─── */
+  #aviso-legal h3 { font-size: 10px; }
+
+  /* ─── Misc ─── */
   .sintomas__grid { gap: 10px; }
   .sintoma-badge img { width: 76px; }
+}
 
-  .produtos-grid { grid-template-columns: 1fr; }
+/* =============================================================================
+   21. Responsive — iPhone SE / muito pequeno (max 375px)
+   ============================================================================= */
 
-  #aviso-legal h3 { font-size: 10px; }
+@media (max-width: 375px) {
+  .hero__title    { font-size: 32px; }
+  .hero__content  { width: 100%; }
+  .quiz__stage    { padding: 20px 14px; }
+  .produtos-grid  { gap: 10px; }
 }

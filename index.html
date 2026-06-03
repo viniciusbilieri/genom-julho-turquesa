@@ -38,7 +38,10 @@
     <!-- Layer 1 (z-index:1): gota full-bleed + badges flutuantes -->
     <div class="hero__visual">
       <div class="hero__drop-wrap">
-        <img src="assets/img/hero-gota3.png" class="hero__drop" alt="Síndrome do Olho Seco">
+        <picture>
+          <source media="(max-width: 1024px) and (orientation: portrait)" srcset="assets/img/hero-gota-mobile.png">
+          <img src="assets/img/hero-gota3.png" class="hero__drop" alt="Síndrome do Olho Seco">
+        </picture>
         <div class="hero__badge hero__badge--ardor">
           <img src="assets/img/badge-ardor.png" alt="Ardor">
         </div>
@@ -60,13 +63,18 @@
     <!-- Layer 2 (z-index:2): texto + Julho Turquesa + logos -->
     <div class="hero__layout container">
 
-      <!-- Topo-esquerda: headline + subtítulo + CTA -->
+      <!-- Topo-esquerda: headline + subtítulo + CTA desktop -->
       <div class="hero__content hero--anim-left">
         <h1 class="hero__title">Alerta de<br>Hidratação</h1>
         <p class="hero__subtitle">Seus olhos também têm sede.<br>Fique atento aos sinais!</p>
-        <div class="hero__cta-group">
+        <div class="hero__cta-group hero__cta--desktop">
           <a href="#quiz" class="btn btn--primary btn--lg">Saiba se você tem olho seco</a>
         </div>
+      </div>
+
+      <!-- CTA mobile/tablet: fica fora do content, posicionado abaixo da gota -->
+      <div class="hero__cta--mobile">
+        <a href="#quiz" class="btn btn--primary btn--lg">Saiba se você tem olho seco</a>
       </div>
 
       <!-- Canto inferior-esquerdo: Julho Turquesa -->
