@@ -63,6 +63,13 @@ $(document).ready(function () {
       if ($('#email').val() == '')   { vok = 0; }
 
       if (vok) {
+        // Mostra confirmação imediatamente — não espera o servidor
+        $('#res_form').hide('slow');
+        $('#res_ok').show('slow');
+        $('#appointment-form-2').trigger('reset');
+        document.getElementById('appointment-form-2').reset();
+
+        // AJAX em background — fire and forget
         $.ajax({
           method: 'POST',
           url: 'https://www.genom.com.br/envia_data.php',
@@ -86,18 +93,6 @@ $(document).ready(function () {
             p_email:   $('#email').val()
           },
           cache: false
-        }).done(function (html) {
-          var str = html;
-          str.trim();
-          if (str == 'OK') {
-            $('#appointment-form-2').trigger('reset');
-            var formd = document.getElementById('appointment-form-2');
-            formd.reset();
-            $('#res_form').hide('slow');
-            $('#res_ok').show('slow');
-          } else {
-            alert('Erro. Tente novamente');
-          }
         });
       } else {
         alert('Preencha todos os campos.');
