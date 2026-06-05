@@ -149,13 +149,16 @@
 
         <!-- Vídeo -->
         <div class="info-col fade-in fade-up">
-          <a href="https://youtu.be/keoDtDzaa5I" target="_blank" rel="noopener" class="video-thumb">
-            <img src="assets/img/imageBFD-1.png" alt="Assista o vídeo — Síndrome do Olho Seco">
-            <div class="video-thumb__overlay">
-              <i class="fab fa-youtube"></i>
-              <span>Assista o<br>Vídeo</span>
-            </div>
-          </a>
+          <div class="video-thumb">
+            <video
+              class="video-thumb__player"
+              controls
+              playsinline
+              preload="metadata"
+              aria-label="Síndrome do Olho Seco — vídeo informativo">
+              <source src="https://wishpropaganda.com.br/genom/OlhoSeco/assets/videos/1934-VIDEO.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
 
         <!-- Texto + CTA -->
@@ -163,7 +166,35 @@
           <p>O uso de telas, exposição ao ar condicionado, clima seco, poluição, uso de lentes de contato, entre outros fatores e medicamentos, podem piorar os sintomas.</p>
           <p>No inverno, por conta da baixa umidade do ar, os casos se agravam. Por isso, não é só o seu corpo que precisa de hidratação. Seus olhos também.</p>
           <h4>Hidrate-os diariamente!</h4>
-          <a href="#quiz" class="btn-primary">Participe do Questionário</a>
+          
+          <a href="#quiz" class="info-quiz-link" aria-label="Acesse nosso questionário">
+          <svg class="info-quiz-link__shape" viewBox="0 0 620 155" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path
+              d="
+                M 28 5
+                H 592
+                Q 616 5 616 29
+                V 94
+                Q 616 118 592 118
+
+                H 360
+                Q 348 118 340 128
+                L 322 148
+                Q 310 160 298 148
+                L 280 128
+                Q 272 118 260 118
+
+                H 28
+                Q 4 118 4 94
+                V 29
+                Q 4 5 28 5
+                Z
+              "
+            />
+          </svg>
+
+          <span>Acesse nosso questionário</span>
+        </a>
         </div>
 
       </div>
