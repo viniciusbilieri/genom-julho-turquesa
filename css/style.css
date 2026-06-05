@@ -347,12 +347,30 @@ p:last-child { margin-bottom: 0; }
   position: absolute;
   inset: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/*
+  Drop-wrap: mantém o aspect-ratio da imagem (desktop 16:9, mobile portrait).
+  Assim os badges são posicionados em % do mesmo espaço que a imagem ocupa —
+  sem letterboxing, sem desalinhamento ao redimensionar o viewport.
+*/
 .hero__drop-wrap {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+/* Landscape (inclui desktop com DevTools aberto): trava em 16:9 */
+@media (orientation: landscape) and (min-width: 769px) {
+  .hero__drop-wrap {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
 }
 
 .hero__drop {
@@ -360,7 +378,7 @@ p:last-child { margin-bottom: 0; }
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: fill;   /* drop-wrap já tem o aspect-ratio correto */
   display: block;
   filter: drop-shadow(0 24px 60px rgba(0,50,70,0.25));
   animation: heroDropIn 1.0s cubic-bezier(0.22,1,0.36,1) 0.2s both;
@@ -612,19 +630,19 @@ p:last-child { margin-bottom: 0; }
    ============================================================================= */
 
 #info {
-  padding-block: 110px;
+  padding-block: 60px;
   background-color: var(--base);
 }
 
 .info-header {
   text-align: center;
-  margin-bottom: 72px;
+  margin-bottom: 40px;
 }
 
 .info-header i {
-  font-size: 28px;
+  font-size: 22px;
   color: var(--teal-400);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   display: block;
   animation: bounce-down 1.8s ease-in-out infinite;
 }
@@ -694,8 +712,9 @@ p:last-child { margin-bottom: 0; }
   display: block;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  height: 100%;
-  min-height: 280px;
+  width: 100%;
+  aspect-ratio: 2/3;
+  height: auto;
   text-decoration: none;
   transition: var(--transition);
 }
@@ -706,6 +725,8 @@ p:last-child { margin-bottom: 0; }
   object-fit: cover;
   display: block;
   border-radius: var(--radius-lg);
+  position: absolute;
+  inset: 0;
 }
 
 /* ─── Coluna texto ─── */
@@ -772,7 +793,7 @@ p:last-child { margin-bottom: 0; }
 
   color: #ffffff;
   font-family: var(--font-heading);
-  font-size: clamp(20px, 2.3vw, 27px);
+  font-size: clamp(16px, 1.6vw, 20px);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;
@@ -864,7 +885,7 @@ p:last-child { margin-bottom: 0; }
 
 #quiz h3 {
   font-family: var(--font-heading);
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: 22px;
   font-weight: 600;
   color: var(--teal-300);
   text-align: center;
@@ -955,7 +976,7 @@ p:last-child { margin-bottom: 0; }
   justify-content: center;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 0.01em;
   text-transform: none;
   line-height: 1.2;
@@ -1360,13 +1381,13 @@ p:last-child { margin-bottom: 0; }
 
 #aviso-legal h3 {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--teal-700);
   line-height: 1.7;
   margin-bottom: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 
 /* =============================================================================
@@ -1578,16 +1599,16 @@ p:last-child { margin-bottom: 0; }
   /* CTA mobile: posicionado de baixo pra cima (previsível em qualquer altura de tela) */
   .hero__cta--mobile {
     display: flex !important;
-    top: auto;           /* remove o top: % que varia com a altura */
-    bottom: 110px;       /* sempre 110px acima do rodapé, independente da altura */
+    top: auto;
+    bottom: 140px;       /* +30px vs anterior */
     width: 80%;
   }
   .hero__cta--mobile .btn { width: 100%; text-align: center; }
 
   /* Logos: mesma distância do fundo, lados opostos */
-  .hero__julho         { bottom: 24px; }
+  .hero__julho         { bottom: 54px; }   /* +30px vs anterior */
   .hero__julho img     { width: 155px; }
-  .hero__brand         { display: block; bottom: 24px; right: var(--container-pad); }
+  .hero__brand         { display: block; bottom: 54px; right: var(--container-pad); }
   .hero__brand img     { width: 155px; }
 
   /* Badges — posições baseadas no ajuste manual do usuário (430x932) */
@@ -1605,17 +1626,21 @@ p:last-child { margin-bottom: 0; }
   .hero__badge--areia       { top: 56%;  left: 65%;   bottom: auto; }
 
   /* ─── Info ─── */
-  #info           { padding-block: 60px; }
-  .info-grid      { grid-template-columns: 1fr; gap: 32px; }
+  #info           { padding-block: 40px; }
+  .info-header    { margin-bottom: 32px; }
+  .info-grid      { grid-template-columns: 1fr; row-gap: 6px; }
   .info-grid .info-col:first-child { grid-column: span 1; }
-  .info-col       { min-width: 0; width: 100%; } /* impede overflow no grid */
-  .info-col:last-child { display: block; }
+  .info-col       { min-width: 0; width: 100%; }
+  .info-col:last-child { display: flex; flex-direction: column; align-items: center; }
+  .info-col:last-child p, .info-col:last-child h4 { width: 100%; }
   .info-col .btn-primary { display: block; text-align: center; }
-  .counter-block  { width: 100%; }
-  .counter-block p { max-width: 100%; }
+  .info-quiz-link { margin-top: 20px; margin-inline: auto; }
+  .counter-block  { width: 100%; padding: 4px 0; }
+  .counter-block p { max-width: 100%; margin-top: 6px; }
 
-  /* Vídeo: largura e altura controladas pela coluna */
-  .video-thumb    { width: 100%; height: auto !important; aspect-ratio: 16/9; }
+  /* Vídeo: portrait, altura dobrada */
+  .video-thumb    { width: 100%; height: 440px !important; aspect-ratio: unset; border-radius: 16px; }
+  .video-thumb__player { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
 
   /* ─── Quiz ─── */
   #quiz           { padding-block: 60px 80px; }
@@ -1632,7 +1657,7 @@ p:last-child { margin-bottom: 0; }
   .quiz__stage #appointment-form-2 > .row { flex-direction: column; }
 
   /* Buttons do quiz menores */
-  .st-btn { font-size: 16px; padding: 15px 20px; }
+  .st-btn { font-size: 18px; padding: 15px 20px; }
 
   /* ─── Produtos ─── */
   #produtos h2  { font-size: clamp(20px, 5vw, 30px); margin-bottom: 32px; }
@@ -1664,29 +1689,31 @@ p:last-child { margin-bottom: 0; }
   .hero__julho    { bottom: 60px; }
   .hero__julho img { width: 110px; }
 
-  .hero__cta--mobile { bottom: 105px; width: 88%; }
+  .hero__cta--mobile { bottom: 135px; width: 88%; }  /* +30px */
   .hero__cta--mobile .btn { text-align: center; }
-  /* Julho: mantém 24px (não deixa o bloco 480px sobrescrever pro 60px antigo) */
-  .hero__julho    { bottom: 24px; }
+  .hero__julho    { bottom: 54px; }                  /* +30px */
   .hero__julho img { width: 120px; }
   .hero__brand img { width: 130px; }
 
   /* ─── Info ─── */
+  #info           { padding-block: 32px; }
+  .info-header    { margin-bottom: 24px; }
+  .info-grid      { gap: 8px; }
   .counter        { font-size: clamp(64px, 18vw, 100px); }
   .counter-label  { font-size: 22px; }
 
   /* ─── Quiz ─── */
   .quiz__stage    { padding: 24px 18px; border-radius: 16px; }
   #quiz h2        { font-size: clamp(24px, 8vw, 36px); }
-  #quiz h3        { font-size: 13px; }
-  .st-btn         { font-size: 15px; padding: 13px 16px; border-radius: 8px; }
+  #quiz h3        { font-size: 20px; }
+  .st-btn         { font-size: 18px; padding: 13px 16px; border-radius: 8px; }
 
   /* ─── Produtos ─── */
   .produtos-grid  { grid-template-columns: 1fr; }
   .produto-card h3 { font-size: 18px; }
 
   /* ─── Aviso Legal ─── */
-  #aviso-legal h3 { font-size: 10px; }
+  #aviso-legal h3 { font-size: 12px; }
 
   /* ─── Misc ─── */
   .sintomas__grid { gap: 10px; }
@@ -1698,22 +1725,28 @@ p:last-child { margin-bottom: 0; }
    ============================================================================= */
 
 @media (max-width: 430px) {
-  /* Título menor para liberar espaço vertical */
-  .hero__title    { font-size: 28px; line-height: 0.95; }
-  .hero__subtitle { font-size: 14px; margin-bottom: 20px; }
+  /* Título e subtítulo: +5px, sem quebra forçada de linha */
+  .hero__title    { font-size: 33px; line-height: 0.95; }
+  .hero__subtitle { font-size: 19px; margin-bottom: 20px; }
+  .hero__title br,
+  .hero__subtitle br { display: none; }
 
   /*
     Ardor badge: mover de top:25% → top:33% para sair debaixo do subtítulo.
     O subtítulo ocupa até ~22% do hero (padding 48px + title 60px + margin 20px ≈ 170px ≈ 20% de 852px).
     top:33% = 281px já está abaixo do texto, dentro do corpo da gota.
   */
-  .hero__badge--ardor { top: 33%; left: 4%; }
+  /* Ardor: sobe 60px (~7% em 852px) */
+  .hero__badge--ardor { top: 26%; left: 4%; }
 
-  /* Secura: também desce um pouco para consistência */
   .hero__badge--secura { top: 60%; left: 1%; }
 
-  /* CTA e logos: mais compactos para tela menor */
-  .hero__cta--mobile  { bottom: 95px; width: 88%; }
+  /* CTA desce 15px */
+  .hero__cta--mobile  { bottom: 110px; width: 88%; }
+
+  /* Logos descem 15px */
+  .hero__julho        { bottom: 39px; }
+  .hero__brand        { bottom: 39px; }
   .hero__julho img    { width: 100px; }
   .hero__brand img    { width: 115px; }
 }
