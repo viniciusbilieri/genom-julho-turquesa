@@ -468,15 +468,18 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
 }
 
-/* CTA mobile: oculto por defeito, aparece apenas em portrait ≤1024px */
+/* CTA mobile: oculto em desktop — só aparece via media query em portrait ≤1024px */
 .hero__cta--mobile {
-  display: none;
+  display: none !important;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   white-space: nowrap;
 }
+
+/* CTA desktop: sempre visível no desktop */
+.hero__cta--desktop { display: flex; }
 
 /* Julho Turquesa: canto inferior-esquerdo do layout */
 .hero__julho {
@@ -697,59 +700,109 @@ p:last-child { margin-bottom: 0; }
   transition: var(--transition);
 }
 
-.video-thumb img {
+.video-thumb__player {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
-}
-
-.video-thumb:hover img { transform: scale(1.04); }
-
-/* Gradiente topo — pseudo-elemento separado para garantir renderização */
-.video-thumb::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 50% 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.video-thumb__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.70) 0%, transparent 45%);
-  display: flex;
-  align-items: flex-end;
-  padding: 20px 24px;
-  gap: 12px;
-  z-index: 2;
-}
-
-.video-thumb__overlay i {
-  font-size: 32px;
-  color: #FF0000;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
-}
-
-.video-thumb__overlay span {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #fff;
-  line-height: 1.2;
+  border-radius: var(--radius-lg);
 }
 
 /* ─── Coluna texto ─── */
 .info-col:last-child {
   display: flex;
   flex-direction: column;
+}
+
+/* Botão questionário na seção info — balão SVG */
+.info-quiz-link {
+  --quiz-btn-bg: rgb(70, 190, 210);
+  --quiz-btn-border: rgba(255, 255, 255, 0.72);
+
+  position: relative;
+  display: inline-block;
+
+  width: min(100%, 360px);
+  aspect-ratio: 620 / 155;
+
+  padding: 0;
+  margin-top: auto;
+
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+
+  color: #ffffff;
+  font-family: var(--font-heading);
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: var(--transition);
+  overflow: visible;
+}
+
+.info-quiz-link__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  z-index: 1;
+}
+
+.info-quiz-link__shape path {
+    fill: var(--quiz-btn-bg);
+  stroke: var(--quiz-btn-border);
+  stroke-width: 10;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.info-quiz-link span {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 76%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.3vw, 27px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
+
+  z-index: 2;
+  pointer-events: none;
+}
+
+.info-quiz-link:hover {
+  transform: translateY(-3px);
+  filter: brightness(0.96);
+  box-shadow: none;
+}
+
+.info-quiz-link:focus-visible {
+  outline: 3px solid var(--teal-200);
+  outline-offset: 6px;
+}
+
+@media (max-width: 480px) {
+  .info-quiz-link {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .info-quiz-link span {
+    font-size: clamp(18px, 5.6vw, 24px);
+  }
 }
 
 .info-col p {
@@ -1275,6 +1328,7 @@ p:last-child { margin-bottom: 0; }
   transform: translateY(-2px);
 }
 
+
 /* CTA da seção — imagem PNG */
 .produtos-cta { text-align: center; }
 .produtos-cta__link {
@@ -1436,7 +1490,7 @@ p:last-child { margin-bottom: 0; }
 
   /* CTA mobile: visível, centralizado abaixo da gota */
   .hero__cta--mobile {
-    display: flex;
+    display: flex !important;
     top: 89%;
     width: auto;
   }
@@ -1521,19 +1575,20 @@ p:last-child { margin-bottom: 0; }
   /* CTA desktop: oculto no iPhone */
   .hero__cta--desktop { display: none; }
 
-  /* CTA mobile: visível, abaixo da gota (letterbox top ~14%, gota até ~78%) */
+  /* CTA mobile: posicionado de baixo pra cima (previsível em qualquer altura de tela) */
   .hero__cta--mobile {
-    display: flex;
-    top: 80%;
+    display: flex !important;
+    top: auto;           /* remove o top: % que varia com a altura */
+    bottom: 110px;       /* sempre 110px acima do rodapé, independente da altura */
     width: 80%;
   }
   .hero__cta--mobile .btn { width: 100%; text-align: center; }
 
-  /* Logos */
-  .hero__julho         { bottom: 40px; }
-  .hero__julho img     { width: 160px; }
-  .hero__brand         { display: block; bottom: 62px; right: var(--container-pad); }
-  .hero__brand img     { width: 160px; }
+  /* Logos: mesma distância do fundo, lados opostos */
+  .hero__julho         { bottom: 24px; }
+  .hero__julho img     { width: 155px; }
+  .hero__brand         { display: block; bottom: 24px; right: var(--container-pad); }
+  .hero__brand img     { width: 155px; }
 
   /* Badges — posições baseadas no ajuste manual do usuário (430x932) */
   .hero__badge--vermelhidao { width: 150px; }
@@ -1609,8 +1664,12 @@ p:last-child { margin-bottom: 0; }
   .hero__julho    { bottom: 60px; }
   .hero__julho img { width: 110px; }
 
-  .hero__cta--mobile { width: 88%; }
+  .hero__cta--mobile { bottom: 105px; width: 88%; }
   .hero__cta--mobile .btn { text-align: center; }
+  /* Julho: mantém 24px (não deixa o bloco 480px sobrescrever pro 60px antigo) */
+  .hero__julho    { bottom: 24px; }
+  .hero__julho img { width: 120px; }
+  .hero__brand img { width: 130px; }
 
   /* ─── Info ─── */
   .counter        { font-size: clamp(64px, 18vw, 100px); }
@@ -1635,7 +1694,32 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* =============================================================================
-   21. Responsive — iPhone SE / muito pequeno (max 375px)
+   21. Responsive — iPhone 16 Pro / 15 / 14 (max 430px portrait)
+   ============================================================================= */
+
+@media (max-width: 430px) {
+  /* Título menor para liberar espaço vertical */
+  .hero__title    { font-size: 28px; line-height: 0.95; }
+  .hero__subtitle { font-size: 14px; margin-bottom: 20px; }
+
+  /*
+    Ardor badge: mover de top:25% → top:33% para sair debaixo do subtítulo.
+    O subtítulo ocupa até ~22% do hero (padding 48px + title 60px + margin 20px ≈ 170px ≈ 20% de 852px).
+    top:33% = 281px já está abaixo do texto, dentro do corpo da gota.
+  */
+  .hero__badge--ardor { top: 33%; left: 4%; }
+
+  /* Secura: também desce um pouco para consistência */
+  .hero__badge--secura { top: 60%; left: 1%; }
+
+  /* CTA e logos: mais compactos para tela menor */
+  .hero__cta--mobile  { bottom: 95px; width: 88%; }
+  .hero__julho img    { width: 100px; }
+  .hero__brand img    { width: 115px; }
+}
+
+/* =============================================================================
+   22. Responsive — iPhone SE / muito pequeno (max 375px)
    ============================================================================= */
 
 @media (max-width: 375px) {
