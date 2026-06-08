@@ -1611,6 +1611,10 @@ p:last-child { margin-bottom: 0; }
   .hero__subtitle { max-width: 100%; font-size: 16px; }
   .hero__shape-divider svg { height: 50px; }
 
+  /* overflow: hidden no visual (não no #hero sticky) — clippa drop-shadows de
+     badges que extravasam a borda direita no iOS Safari sem bug do sticky */
+  .hero__visual { overflow: hidden; }
+
   /* CTA desktop: oculto no iPhone */
   .hero__cta--desktop { display: none; }
 
@@ -1629,9 +1633,9 @@ p:last-child { margin-bottom: 0; }
   .hero__brand         { display: block; bottom: 54px; right: var(--container-pad); }
   .hero__brand img     { width: 155px; }
 
-  /* Badges — posições em % do drop-wrap (≈ altura real da gota mobile).
-     Reference: iPhone 14 Pro 393×606px (aspect-ratio 700/1080, max 80svh).
-     Texto termina em ~172px = ~28% da gota. Todas as badges ficam abaixo disso. */
+  /* Badges — % do drop-wrap (393×606px no iPhone 14 Pro, 90svh width-constrained).
+     Zona segura da foto: ~15%–82% (abaixo do topo transparente, acima da ponta).
+     Texto termina em ~28%. Badges entre 30%–62% — inteiramente sobre a mulher. */
   .hero__badge--vermelhidao { width: 150px; }
   .hero__badge--ardor       { width: 140px; }
   .hero__badge--coceira     { width: 140px; }
@@ -1640,9 +1644,9 @@ p:last-child { margin-bottom: 0; }
 
   .hero__badge--ardor       { top: 32%;  left: 4%;   bottom: auto; }
   .hero__badge--coceira     { top: 30%;  left: 55%;  bottom: auto; }
-  .hero__badge--vermelhidao { top: 50%;  left: auto; right: 0; bottom: auto; }
-  .hero__badge--secura      { top: 65%;  left: 1%;   bottom: auto; }
-  .hero__badge--areia       { top: 70%;  left: 56%;  bottom: auto; }
+  .hero__badge--vermelhidao { top: 48%;  left: auto; right: 0; bottom: auto; }
+  .hero__badge--secura      { top: 54%;  left: 1%;   bottom: auto; }
+  .hero__badge--areia       { top: 60%;  left: 56%;  bottom: auto; }
 
   /* ─── Info ─── */
   #info           { padding-block: 40px; }
@@ -1750,14 +1754,12 @@ p:last-child { margin-bottom: 0; }
   .hero__title br,
   .hero__subtitle br { display: none; }
 
-  /* Badges ≤430px: tamanho ligeiramente reduzido (bordas dentro da gota).
-     Posições idênticas ao bloco 768px — reference frame agora é a gota real
-     (≈606px no 14 Pro, ≈662px no Pro Max), não o hero inteiro. */
+  /* Badges ≤430px: tamanho reduzido, posições espelham o bloco 768px. */
   .hero__badge--ardor       { width: 130px; top: 32%; left: 4%; }
   .hero__badge--coceira     { width: 130px; top: 30%; }
-  .hero__badge--vermelhidao { width: 140px; top: 50%; }
-  .hero__badge--secura      { width: 130px; top: 65%; left: 1%; }
-  .hero__badge--areia       { width: 130px; top: 70%; left: 56%; }
+  .hero__badge--vermelhidao { width: 140px; top: 48%; }
+  .hero__badge--secura      { width: 130px; top: 54%; left: 1%; }
+  .hero__badge--areia       { width: 130px; top: 60%; left: 56%; }
 
   /* CTA desce 15px */
   .hero__cta--mobile  { bottom: 110px; width: 88%; }
