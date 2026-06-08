@@ -375,21 +375,19 @@ p:last-child { margin-bottom: 0; }
 
 /*
   Portrait mobile (≥376px): aspect-ratio da hero-gota-mobile.png (700×1080).
-  max-height: 80svh limita a gota a 80% da tela, deixando espaço para
-  CTA e logos abaixo — sugestão do cliente confirmada.
-  align-items: flex-start ancora a gota no topo do hero.
-  SE (≤375px) fica de fora: tela pequena demais para o cap de 80svh
-  sem encolher muito a largura.
+  max-height: 90svh — com 90%, a restrição passa a ser a largura (393px →
+  altura=606px < 90svh≈612px), então a gota fica full-width e exibe o
+  teardrop completo sem clipping na ponta inferior.
+  align-items: center (herdado da base) centraliza a gota verticalmente
+  no hero; as badges seguem junto pois estão dentro do drop-wrap.
+  SE (≤375px) fica de fora: tela muito pequena.
 */
 @media (min-width: 376px) and (max-width: 768px) and (orientation: portrait) {
-  .hero__visual {
-    align-items: flex-start;
-  }
   .hero__drop-wrap {
     aspect-ratio: 700 / 1080;
     width: 100%;
     height: auto;
-    max-height: 80svh;
+    max-height: 90svh;
   }
 }
 
