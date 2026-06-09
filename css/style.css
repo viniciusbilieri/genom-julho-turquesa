@@ -1519,6 +1519,13 @@ p:last-child { margin-bottom: 0; }
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
   :root { --section-py: var(--section-py-md); }
 
+  /* Gota: mesma fórmula min() do mobile, 10% menor que o iPhone 14 (74svh → 67svh) */
+  .hero__drop-wrap {
+    aspect-ratio: 700 / 1080;
+    width: min(100%, calc(67svh * 700 / 1080));
+    height: auto;
+  }
+
   .hero__layout {
     align-items: flex-start;
     padding-block: 50px 200px;
@@ -1528,33 +1535,40 @@ p:last-child { margin-bottom: 0; }
   /* CTA desktop: oculto no iPad portrait */
   .hero__cta--desktop { display: none; }
 
-  /* CTA mobile: visível, centralizado abaixo da gota */
+  /* CTA mobile: bottom-based para não sobrepar logos */
   .hero__cta--mobile {
     display: flex !important;
-    top: 89%;
+    top: auto;
+    bottom: 170px;
     width: auto;
   }
   .hero__cta--mobile .btn { width: auto; }
 
   /* Logos */
-  .hero__julho     { bottom: 50px; }
-  .hero__julho img { width: 230px; }
-  .hero__brand     { display: block; bottom: 90px; right: var(--container-pad); }
-  .hero__brand img { width: 230px; }
+  .hero__julho     { bottom: 60px; }
+  .hero__julho img { width: 200px; }
+  .hero__brand     { display: block; bottom: 60px; right: var(--container-pad); }
+  .hero__brand img { width: 200px; }
 
-  /* Badge sizes do ajuste manual do usuário */
-  .hero__badge--vermelhidao { width: 280px; }
-  .hero__badge--ardor       { width: 250px; }
-  .hero__badge--coceira     { width: 250px; }
-  .hero__badge--areia       { width: 250px; }
-  .hero__badge--secura      { width: 250px; }
+  /* Badge sizes — iPad Air portrait */
+  .hero__badge--vermelhidao { width: 240px; }
+  .hero__badge--ardor       { width: 230px; }
+  .hero__badge--coceira     { width: 220px; }
+  .hero__badge--areia       { width: 220px; }
+  .hero__badge--secura      { width: 220px; }
 
-  /* Posições convertidas de px → % (1024×1366) */
-  .hero__badge--ardor       { top: 22%;  left: 9%;   bottom: auto; }
-  .hero__badge--coceira     { top: 11%;  left: 54%;  bottom: auto; }
-  .hero__badge--vermelhidao { top: 32%;  left: 72%;  bottom: auto; }
-  .hero__badge--secura      { top: 59%;  left: 4%;   bottom: auto; }
-  .hero__badge--areia       { top: 68%;  left: 62%;  bottom: auto; }
+  /* Posições — referência: gota 456×703px centrada em 820px visual.
+     Negativos = badge extravasa o edge da gota para o espaço turquesa. */
+  .hero__badge--coceira     { top: 8%;  left: 52%;  bottom: auto; }
+  .hero__badge--ardor       { top: 19%;  left: -12%; bottom: auto; }
+  .hero__badge--vermelhidao { top: 34%;  left: auto; right: -20%; bottom: auto; }
+  .hero__badge--secura      { top: 55%;  left: -12%; bottom: auto; }
+  .hero__badge--areia       { top: 63%;  left: 55%;  bottom: auto; }
+
+  /* Info — vídeo a 70% no iPad portrait.
+     O botão (margin-top:auto na col flex) alinha ao fundo da coluna,
+     que pelo grid stretch tem a mesma altura que a coluna do vídeo. */
+  .video-thumb { width: 70%; }
 }
 
 /* =============================================================================
@@ -1797,6 +1811,11 @@ p:last-child { margin-bottom: 0; }
   .hero__content  { width: 100%; }
   .quiz__stage    { padding: 20px 14px; }
   .produtos-grid  { gap: 10px; }
+}
+
+/* iPad Mini portrait (600–768px × ~1024px) — CTA sobe ~5% do viewport */
+@media (min-width: 600px) and (max-width: 768px) and (orientation: portrait) {
+  .hero__cta--mobile { bottom: 190px; }
 }
 
 /* SE portrait: gota sobe para Secura/Areia ficarem visíveis; badges em zigzag */
