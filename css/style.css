@@ -1809,7 +1809,7 @@ p:last-child { margin-bottom: 0; }
   /* Badges menores e redistribuídos: alternância esq/dir desce a tela */
   .hero__badge--coceira     { width: 106px; top: 10%; left: 54%; }
   .hero__badge--ardor       { width: 106px; top: 28%; left: -13%; }
-  .hero__badge--vermelhidao { width: 112px; top: 36%; right: -20%; }
+  .hero__badge--vermelhidao { width: 112px; top: 32%; right: -20%; }
   .hero__badge--secura      { width: 106px; top: 56%; left: -3%; }
   .hero__badge--areia       { width: 106px; top: 56%; left: 60%; }
 }
