@@ -387,7 +387,7 @@ p:last-child { margin-bottom: 0; }
 @media (min-width: 376px) and (max-width: 768px) and (orientation: portrait) {
   .hero__drop-wrap {
     aspect-ratio: 700 / 1080;
-    width: min(100%, calc(80svh * 700 / 1080));
+    width: min(100%, calc(74svh * 700 / 1080));
     height: auto;
   }
 }
@@ -1616,6 +1616,10 @@ p:last-child { margin-bottom: 0; }
      badges que extravasam a borda direita no iOS Safari sem bug do sticky */
   .hero__visual { overflow: hidden; }
 
+  /* Remove a sombra grande (0 24px 60px) que no mobile cria halo escuro visível
+     nas bordas da gota — no desktop faz sentido, aqui fica feio */
+  .hero__drop { filter: none; }
+
   /* CTA desktop: oculto no iPhone */
   .hero__cta--desktop { display: none; }
 
@@ -1634,20 +1638,21 @@ p:last-child { margin-bottom: 0; }
   .hero__brand         { display: block; bottom: 54px; right: var(--container-pad); }
   .hero__brand img     { width: 155px; }
 
-  /* Badges — % do drop-wrap (393×606px no iPhone 14 Pro, 90svh width-constrained).
-     Zona segura da foto: ~15%–82% (abaixo do topo transparente, acima da ponta).
-     Texto termina em ~28%. Badges entre 30%–62% — inteiramente sobre a mulher. */
-  .hero__badge--vermelhidao { width: 150px; }
-  .hero__badge--ardor       { width: 140px; }
-  .hero__badge--coceira     { width: 140px; }
-  .hero__badge--areia       { width: 150px; }
-  .hero__badge--secura      { width: 140px; }
+  /* Badges — % do drop-wrap (~284px × 438px no 14 Pro com 74svh).
+     Esquerda: Ardor e Secura flush-left (left:0).
+     Direita: Coceira alto, Vermelhidão meio, Areia baixo — separação vertical
+     suficiente para não sumir um atrás do outro. */
+  .hero__badge--vermelhidao { width: 148px; }
+  .hero__badge--ardor       { width: 138px; }
+  .hero__badge--coceira     { width: 138px; }
+  .hero__badge--areia       { width: 148px; }
+  .hero__badge--secura      { width: 138px; }
 
-  .hero__badge--ardor       { top: 32%;  left: 4%;   bottom: auto; }
-  .hero__badge--coceira     { top: 30%;  left: 55%;  bottom: auto; }
-  .hero__badge--vermelhidao { top: 48%;  left: auto; right: 0; bottom: auto; }
-  .hero__badge--secura      { top: 54%;  left: 1%;   bottom: auto; }
-  .hero__badge--areia       { top: 60%;  left: 56%;  bottom: auto; }
+  .hero__badge--ardor       { top: 29%;  left: 0;    bottom: auto; }
+  .hero__badge--coceira     { top: 19%;  left: 62%;  bottom: auto; }
+  .hero__badge--vermelhidao { top: 43%;  left: auto; right: 0; bottom: auto; }
+  .hero__badge--secura      { top: 58%;  left: 0;    bottom: auto; }
+  .hero__badge--areia       { top: 68%;  left: 60%;  bottom: auto; }
 
   /* ─── Info ─── */
   #info           { padding-block: 40px; }
@@ -1756,11 +1761,11 @@ p:last-child { margin-bottom: 0; }
   .hero__subtitle br { display: none; }
 
   /* Badges ≤430px: tamanho reduzido, posições espelham o bloco 768px. */
-  .hero__badge--ardor       { width: 130px; top: 32%; left: 4%; }
-  .hero__badge--coceira     { width: 130px; top: 30%; }
-  .hero__badge--vermelhidao { width: 140px; top: 48%; }
-  .hero__badge--secura      { width: 130px; top: 54%; left: 1%; }
-  .hero__badge--areia       { width: 130px; top: 60%; left: 56%; }
+  .hero__badge--ardor       { width: 120px; top: 29%; left: 0; }
+  .hero__badge--coceira     { width: 120px; top: 19%; left: 62%; }
+  .hero__badge--vermelhidao { width: 130px; top: 43%; }
+  .hero__badge--secura      { width: 120px; top: 58%; left: 0; }
+  .hero__badge--areia       { width: 120px; top: 68%; left: 60%; }
 
   /* CTA desce 15px */
   .hero__cta--mobile  { bottom: 110px; width: 88%; }
