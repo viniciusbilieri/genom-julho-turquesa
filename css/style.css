@@ -387,10 +387,8 @@ p:last-child { margin-bottom: 0; }
 @media (min-width: 376px) and (max-width: 768px) and (orientation: portrait) {
   .hero__drop-wrap {
     aspect-ratio: 700 / 1080;
-    width: auto;
-    max-width: 100%;
+    width: min(100%, calc(80svh * 700 / 1080));
     height: auto;
-    max-height: 80svh;
   }
 }
 
