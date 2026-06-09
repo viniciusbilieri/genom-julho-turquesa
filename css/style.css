@@ -120,6 +120,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* iOS Safari: body sozinho não basta — html precisa ter também */
 }
 
 body {
@@ -375,19 +376,21 @@ p:last-child { margin-bottom: 0; }
 
 /*
   Portrait mobile (≥376px): aspect-ratio da hero-gota-mobile.png (700×1080).
-  max-height: 90svh — com 90%, a restrição passa a ser a largura (393px →
-  altura=606px < 90svh≈612px), então a gota fica full-width e exibe o
-  teardrop completo sem clipping na ponta inferior.
-  align-items: center (herdado da base) centraliza a gota verticalmente
-  no hero; as badges seguem junto pois estão dentro do drop-wrap.
+  width: auto + max-width: 100% — quando max-height entra em ação, o browser
+  deriva a largura a partir da altura via aspect-ratio (sem distorção).
+  Com width: 100%, max-height travaria a altura mas manteria a largura em 100%,
+  violando o aspect-ratio e esticando a imagem.
+  max-height: 80svh → ~10% menor que 90svh; quando 80svh < 606px (altura natural
+  de 393px com AR 700/1080), a gota encolhe proporcionalmente em ambas dimensões.
   SE (≤375px) fica de fora: tela muito pequena.
 */
 @media (min-width: 376px) and (max-width: 768px) and (orientation: portrait) {
   .hero__drop-wrap {
     aspect-ratio: 700 / 1080;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
-    max-height: 90svh;
+    max-height: 80svh;
   }
 }
 
