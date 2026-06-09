@@ -1803,13 +1803,13 @@ p:last-child { margin-bottom: 0; }
 @media (max-width: 375px) and (orientation: portrait) {
   .hero__drop-wrap {
     width: min(100%, calc(66svh * 700 / 1080));
-    transform: translateY(-15%);
+    transform: translateY(-10%);
   }
 
   /* Badges menores e redistribuídos: alternância esq/dir desce a tela */
   .hero__badge--coceira     { width: 106px; top: 10%; left: 54%; }
-  .hero__badge--ardor       { width: 106px; top: 28%; left: -8%; }
-  .hero__badge--vermelhidao { width: 112px; top: 42%; right: -14%; }
+  .hero__badge--ardor       { width: 106px; top: 28%; left: -13%; }
+  .hero__badge--vermelhidao { width: 112px; top: 42%; right: -20%; }
   .hero__badge--secura      { width: 106px; top: 56%; left: -3%; }
-  .hero__badge--areia       { width: 106px; top: 68%; left: 60%; }
+  .hero__badge--areia       { width: 106px; top: 62%; left: 60%; }
 }
