@@ -1634,10 +1634,10 @@ p:last-child { margin-bottom: 0; }
 
   /* CTA: vidro fosco sobre fundo turquesa no mobile */
   #hero .btn--primary {
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(255, 255, 255, 0.58);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border: 1.5px solid rgba(255, 255, 255, 0.90);
+    border: 1.5px solid rgba(255, 255, 255, 0.80);
   }
 
   /* Logos: mesma distância do fundo, lados opostos */
@@ -1658,9 +1658,9 @@ p:last-child { margin-bottom: 0; }
 
   .hero__badge--ardor       { top: 29%;  left: -8%;  bottom: auto; }
   .hero__badge--coceira     { top: 15%;  left: 55%;  bottom: auto; }
-  .hero__badge--vermelhidao { top: 35%;  left: auto; right: -6%; bottom: auto; }
+  .hero__badge--vermelhidao { top: 35%;  left: auto; right: -14%; bottom: auto; }
   .hero__badge--secura      { top: 58%;  left: -3%;  bottom: auto; }
-  .hero__badge--areia       { top: 58%;  left: 56%;  bottom: auto; }
+  .hero__badge--areia       { top: 58%;  left: 64%;  bottom: auto; }
 
   /* ─── Info ─── */
   #info           { padding-block: 40px; }
@@ -1769,11 +1769,11 @@ p:last-child { margin-bottom: 0; }
   .hero__subtitle br { display: none; }
 
   /* Badges ≤430px: tamanho reduzido, posições espelham o bloco 768px. */
-  .hero__badge--ardor       { width: 120px; top: 29%; left: -8%;  }
-  .hero__badge--coceira     { width: 120px; top: 15%; left: 55%;  }
-  .hero__badge--vermelhidao { width: 130px; top: 35%; right: -6%; }
-  .hero__badge--secura      { width: 120px; top: 58%; left: -3%;  }
-  .hero__badge--areia       { width: 120px; top: 58%; left: 56%;  }
+  .hero__badge--ardor       { width: 120px; top: 29%; left: -8%;   }
+  .hero__badge--coceira     { width: 120px; top: 15%; left: 55%;   }
+  .hero__badge--vermelhidao { width: 130px; top: 35%; right: -14%; }
+  .hero__badge--secura      { width: 120px; top: 58%; left: -3%;   }
+  .hero__badge--areia       { width: 120px; top: 58%; left: 64%;   }
 
   /* CTA desce 15px */
   .hero__cta--mobile  { bottom: 110px; width: 88%; }
