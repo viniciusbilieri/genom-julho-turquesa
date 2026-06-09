@@ -382,9 +382,9 @@ p:last-child { margin-bottom: 0; }
   violando o aspect-ratio e esticando a imagem.
   max-height: 80svh → ~10% menor que 90svh; quando 80svh < 606px (altura natural
   de 393px com AR 700/1080), a gota encolhe proporcionalmente em ambas dimensões.
-  SE (≤375px) fica de fora: tela muito pequena.
+  Inclui iPhone SE (375px) — o min() formula é seguro para telas menores.
 */
-@media (min-width: 376px) and (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {
   .hero__drop-wrap {
     aspect-ratio: 700 / 1080;
     width: min(100%, calc(74svh * 700 / 1080));
