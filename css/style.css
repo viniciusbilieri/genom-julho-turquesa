@@ -1790,8 +1790,18 @@ p:last-child { margin-bottom: 0; }
    ============================================================================= */
 
 @media (max-width: 375px) {
-  .hero__title    { font-size: 32px; }
+  /* Hero: comprime o espaço vertical do texto para a gota respirar mais */
+  .hero__layout   { padding-block: 18px 140px; }
+  .hero__title    { font-size: 28px; }
+  .hero__subtitle { font-size: 14px; line-height: 1.35; }
   .hero__content  { width: 100%; }
   .quiz__stage    { padding: 20px 14px; }
   .produtos-grid  { gap: 10px; }
+}
+
+/* Gota ligeiramente menor no SE portrait — Secura e Areia ficam dentro da área visível */
+@media (max-width: 375px) and (orientation: portrait) {
+  .hero__drop-wrap {
+    width: min(100%, calc(66svh * 700 / 1080));
+  }
 }
