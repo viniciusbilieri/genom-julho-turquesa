@@ -518,31 +518,35 @@ p:last-child { margin-bottom: 0; }
 /* CTA desktop: sempre visível no desktop */
 .hero__cta--desktop { display: flex; }
 
-/* Julho Turquesa: canto inferior-esquerdo do layout */
-.hero__julho {
+/* Logos do rodapé do hero: Julho Turquesa (esq.) + Genom/União Química (dir.).
+   align-items: center alinha os dois logos na mesma linha horizontal,
+   independente da altura de cada imagem. */
+.hero__logos {
   position: absolute;
   bottom: 100px;
   left: var(--container-pad);
+  right: var(--container-pad);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
 .hero__julho img {
   width: 180px;
   height: auto;
   display: block;
 }
 
-/* Brand logos: canto inferior-direito do layout */
-.hero__brand {
-  position: absolute;
-  bottom: 100px;
-  right: var(--container-pad);
-  z-index: 3;
-}
 .hero__brand img {
   filter: brightness(0) invert(1);
   opacity: 0.90;
   width: 220px;
   height: auto;
   display: block;
+  /* Ajuste fino (calibrado visualmente) para alinhar o "miolo" do logo
+     Genom/União Química com o centro visual do logo Julho Turquesa. */
+  transform: translateY(43.1%);
 }
 
 /* Botão branco sobre fundo turquesa */
@@ -1545,10 +1549,9 @@ p:last-child { margin-bottom: 0; }
   .hero__cta--mobile .btn { width: auto; }
 
   /* Logos */
-  .hero__julho     { bottom: 60px; }
+  .hero__logos     { bottom: 60px; }
   .hero__julho img { width: 200px; }
-  .hero__brand     { display: block; bottom: 60px; right: var(--container-pad); }
-  .hero__brand img { width: 200px; }
+  .hero__brand img { width: 220px; } /* +10% (era 200px) */
 
   /* Badge sizes — iPad Air portrait */
   .hero__badge--vermelhidao { width: 240px; }
@@ -1655,10 +1658,9 @@ p:last-child { margin-bottom: 0; }
   }
 
   /* Logos: mesma distância do fundo, lados opostos */
-  .hero__julho         { bottom: 54px; }   /* +30px vs anterior */
+  .hero__logos         { bottom: 54px; }   /* +30px vs anterior */
   .hero__julho img     { width: 155px; }
-  .hero__brand         { display: block; bottom: 54px; right: var(--container-pad); }
-  .hero__brand img     { width: 155px; }
+  .hero__brand img     { width: 205px; } /* +30% (era 155px) */
 
   /* Badges — % do drop-wrap (~284px × 438px no 14 Pro com 74svh).
      Esquerda: Ardor e Secura flush-left (left:0).
@@ -1737,14 +1739,13 @@ p:last-child { margin-bottom: 0; }
   .hero__content  { width: 95%; }
   .hero__title    { font-size: clamp(36px, 10vw, 52px); }
   .hero__subtitle { font-size: 15px; }
-  .hero__julho    { bottom: 60px; }
   .hero__julho img { width: 110px; }
 
   .hero__cta--mobile { bottom: 135px; width: 88%; }  /* +30px */
   .hero__cta--mobile .btn { text-align: center; }
-  .hero__julho    { bottom: 54px; }                  /* +30px */
+  .hero__logos    { bottom: 54px; }                  /* +30px */
   .hero__julho img { width: 120px; }
-  .hero__brand img { width: 130px; }
+  .hero__brand img { width: 172px; } /* +30% (era 130px) */
 
   /* ─── Info ─── */
   #info           { padding-block: 32px; }
@@ -1793,10 +1794,9 @@ p:last-child { margin-bottom: 0; }
   .hero__cta--mobile  { bottom: 110px; width: 88%; }
 
   /* Logos descem 15px */
-  .hero__julho        { bottom: 39px; }
-  .hero__brand        { bottom: 39px; }
+  .hero__logos        { bottom: 39px; }
   .hero__julho img    { width: 100px; }
-  .hero__brand img    { width: 115px; }
+  .hero__brand img    { width: 152px; } /* +30% (era 115px) */
 }
 
 /* =============================================================================
