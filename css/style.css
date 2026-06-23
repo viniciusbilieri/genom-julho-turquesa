@@ -364,11 +364,13 @@ p:last-child { margin-bottom: 0; }
   height: 100%;
 }
 
-/* Landscape ≥769px (desktop + tablet): trava em 16/9 */
+/* Landscape ≥769px (desktop + tablet): trava em 16/9.
+   min() impede que width:100% quebre a proporção em viewports mais
+   largos que 16:9 — a gota encolhe e centraliza, badges acompanham. */
 @media (orientation: landscape) and (min-width: 769px) {
   .hero__drop-wrap {
     aspect-ratio: 16 / 9;
-    width: 100%;
+    width: min(100%, calc(100svh * 16 / 9));
     height: auto;
     max-height: 100%;
   }
@@ -394,10 +396,11 @@ p:last-child { margin-bottom: 0; }
 
 .hero__drop {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;   /* drop-wrap sempre tem o aspect-ratio correto */
+  top: 10.4%;
+  left: 32.8%;
+  width: 34.3%;
+  height: 79.7%;
+  object-fit: fill;
   display: block;
   filter: drop-shadow(0 24px 60px rgba(0,50,70,0.25));
   animation: heroDropIn 1.0s cubic-bezier(0.22,1,0.36,1) 0.2s both;
@@ -414,12 +417,15 @@ p:last-child { margin-bottom: 0; }
   filter: drop-shadow(0 8px 20px rgba(0,40,60,0.22));
 }
 
-/* Tamanhos individuais conforme o KV (Vermelhidão > Ardor > Coceira = Areia > Secura) */
-.hero__badge--vermelhidao { width: 270px; }
-.hero__badge--ardor       { width: 200px; }
-.hero__badge--coceira     { width: 170px; }
-.hero__badge--areia       { width: 170px; }
-.hero__badge--secura      { width: 170px;  }
+/* Tamanhos escalam pela altura do viewport (svh) — a mesma dimensão que
+   restringe a gota via min(). Em 1080px de altura → valores iguais ao KV.
+   Em viewports baixos → badges encolhem junto com a gota.
+   clamp() garante legibilidade mínima e teto máximo. */
+.hero__badge--vermelhidao { width: clamp(130px, 25svh, 420px); }
+.hero__badge--ardor       { width: clamp(105px, 18.5svh, 310px); }
+.hero__badge--coceira     { width: clamp(90px,  15.7svh, 265px); }
+.hero__badge--areia       { width: clamp(90px,  15.7svh, 265px); }
+.hero__badge--secura      { width: clamp(90px,  15.7svh, 265px); }
 
 .hero__badge--ardor {
   top: 13%;
@@ -450,11 +456,11 @@ p:last-child { margin-bottom: 0; }
 .hero__badge--coceira img { animation: badge-float-d 3.6s ease-in-out infinite; }
 
 .hero__badge--areia {
-  bottom: 24%;
+  bottom: 20%;
   left: 66%;
   animation: badge-pop 0.65s cubic-bezier(0.34,1.56,0.64,1) 1.2s forwards;
 }
-.hero__badge--areia img { animation: badge-float-e 4.5s ease-in-out infinite; }
+.hero__badge--areia img { animation: badge-float-e 4.9s ease-in-out infinite; }
 
 /*
   Layout: ocupa toda a altura do hero.
@@ -470,6 +476,12 @@ p:last-child { margin-bottom: 0; }
   min-height: 100vh;
   min-height: 100svh;
   padding-block: 80px 140px;
+}
+
+/* ≥1920: texto fica na esquerda (fiel ao KV) em vez de
+   centralizar com o .container — evita invadir os badges. */
+@media (min-width: 1920px) {
+  .hero__layout { max-width: none; }
 }
 
 .hero__content {
@@ -492,6 +504,7 @@ p:last-child { margin-bottom: 0; }
 .hero__subtitle {
   font-family: var(--font-body);
   font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 700;
   color: rgba(255,255,255,0.85);
   line-height: 1.65;
   margin-bottom: 28px;
@@ -523,7 +536,7 @@ p:last-child { margin-bottom: 0; }
    independente da altura de cada imagem. */
 .hero__logos {
   position: absolute;
-  bottom: 100px;
+  bottom: clamp(40px, 9svh, 100px);
   left: var(--container-pad);
   right: var(--container-pad);
   z-index: 3;
@@ -541,12 +554,9 @@ p:last-child { margin-bottom: 0; }
 .hero__brand img {
   filter: brightness(0) invert(1);
   opacity: 0.90;
-  width: 220px;
+  width: 130px;
   height: auto;
   display: block;
-  /* Ajuste fino (calibrado visualmente) para alinhar o "miolo" do logo
-     Genom/União Química com o centro visual do logo Julho Turquesa. */
-  transform: translateY(43.1%);
 }
 
 /* Botão branco sobre fundo turquesa */
@@ -1486,29 +1496,7 @@ p:last-child { margin-bottom: 0; }
    17. Responsive — Desktop médio (max 1280px)
    ============================================================================= */
 
-@media (max-width: 1280px) {
-  .hero__badge--vermelhidao { width: 210px; }
-  .hero__badge--ardor       { width: 165px; }
-  .hero__badge--coceira     { width: 140px; }
-  .hero__badge--areia       { width: 140px; }
-  .hero__badge--secura      { width: 140px; }
-}
-
-/* =============================================================================
-   18. Responsive — Tablet landscape (max 1024px, orientation landscape)
-   ============================================================================= */
-
-/*
-  Em landscape a gota 16:9 é limitada pela altura → pillar-boxing lateral.
-  As posições % de top/bottom continuam corretas; só reduzimos os tamanhos.
-*/
-@media (max-width: 1024px) and (orientation: landscape) {
-  .hero__badge--vermelhidao { width: 130px; }
-  .hero__badge--ardor       { width: 105px; }
-  .hero__badge--coceira     { width: 90px;  }
-  .hero__badge--areia       { width: 90px;  }
-  .hero__badge--secura      { width: 90px;  }
-}
+/* Seções 17–18: breakpoints de badge removidos — clamp(svh) escala contínua */
 
 /* =============================================================================
    18b. Responsive — iPad portrait (min 769px, max 1024px, portrait)
@@ -1551,7 +1539,7 @@ p:last-child { margin-bottom: 0; }
   /* Logos */
   .hero__logos     { bottom: 60px; }
   .hero__julho img { width: 200px; }
-  .hero__brand img { width: 220px; } /* +10% (era 200px) */
+  .hero__brand img { width: 130px; }
 
   /* Badge sizes — iPad Air portrait */
   .hero__badge--vermelhidao { width: 240px; }
@@ -1633,9 +1621,14 @@ p:last-child { margin-bottom: 0; }
      badges que extravasam a borda direita no iOS Safari sem bug do sticky */
   .hero__visual { overflow: hidden; }
 
-  /* Remove a sombra grande (0 24px 60px) que no mobile cria halo escuro visível
-     nas bordas da gota — no desktop faz sentido, aqui fica feio */
-  .hero__drop { filter: none; }
+  /* Gota-4 no mobile: posição equivalente à hero-gota-mobile.png (700×1080) */
+  .hero__drop {
+    filter: none;
+    top: 10.4%;
+    left: 1.6%;
+    width: 94.1%;
+    height: 79.7%;
+  }
 
   /* CTA desktop: oculto no iPhone */
   .hero__cta--desktop { display: none; }
@@ -1660,7 +1653,7 @@ p:last-child { margin-bottom: 0; }
   /* Logos: mesma distância do fundo, lados opostos */
   .hero__logos         { bottom: 54px; }   /* +30px vs anterior */
   .hero__julho img     { width: 155px; }
-  .hero__brand img     { width: 205px; } /* +30% (era 155px) */
+  .hero__brand img     { width: 120px; }
 
   /* Badges — % do drop-wrap (~284px × 438px no 14 Pro com 74svh).
      Esquerda: Ardor e Secura flush-left (left:0).
@@ -1745,7 +1738,7 @@ p:last-child { margin-bottom: 0; }
   .hero__cta--mobile .btn { text-align: center; }
   .hero__logos    { bottom: 54px; }                  /* +30px */
   .hero__julho img { width: 120px; }
-  .hero__brand img { width: 172px; } /* +30% (era 130px) */
+  .hero__brand img { width: 100px; }
 
   /* ─── Info ─── */
   #info           { padding-block: 32px; }
@@ -1796,7 +1789,7 @@ p:last-child { margin-bottom: 0; }
   /* Logos descem 15px */
   .hero__logos        { bottom: 39px; }
   .hero__julho img    { width: 100px; }
-  .hero__brand img    { width: 152px; } /* +30% (era 115px) */
+  .hero__brand img    { width: 90px; }
 }
 
 /* =============================================================================
