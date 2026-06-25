@@ -1453,17 +1453,38 @@ p:last-child { margin-bottom: 0; }
   padding-block: 38px;
 }
 
-.footer-logo {
-  text-align: center;
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
   margin-bottom: 20px;
+  padding-inline: var(--container-pad);
 }
 
-.footer-logo img {
-  height: 38px;
+.footer-logo-img {
+  height: 60px;
   width: auto;
-  margin-inline: auto;
+  display: block;
   filter: brightness(0) invert(1);
   opacity: 0.75;
+}
+
+.footer-uq-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
+
+.footer-sac-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.60;
 }
 
 .footer-links {
